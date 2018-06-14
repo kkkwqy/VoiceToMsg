@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="voicePlugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--插件名-->
+	<name>voicePlugin</name>
+	<!--js部分配置-->
+    <js-module name="voicePlugin" src="www/voicePlugin.js">
+		<!--js调用的对象名-->
+        <clobbers target="cordova.plugins.voicePlugin" />
+    </js-module>
+	
+	<!--添加安卓平台-->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">  
+			<!--js调用的对象名-->
+            <feature name="voicePlugin">
+				<!-- value=java类名全路径--> 
+                <param name="android-package" value="com.cesc.ewater.cordovaPlugin.VoiceToMsg"/> 
+            </feature>  
+        </config-file>
+		<config-file parent="/*" target="AndroidManifest.xml">
+			<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25" />
+			<uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.READ_CONTACTS" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        </config-file>		
+		<!-- src:java源文件的路径， target-dir:插件安装好后，源文件的位置，要和上面的包名对应 -->
+        <source-file src="src/android/VoiceToMsg.java" target-dir="src/com/cesc/ewater/cordovaPlugin" />          
+		<source-file src="src/android/Msc.jar" target-dir="libs"/>
+        <source-file src="src/android/Sunflower.jar" target-dir="libs"/>
+        <source-file src="src/android/armeabi/libmsc.so" target-dir="libs/armeabi"/>
+        <source-file src="src/android/armeabi/libmsc.so" target-dir="libs"/>
+	</platform> 
+</plugin>
